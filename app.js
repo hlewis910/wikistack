@@ -21,10 +21,14 @@ then(() => {
 const init = async () => {
   await models.user.sync()
   await models.page.sync()
+  await models.db.sync()
 
-  
+  expressApp.list(PORT, () => {
+    console.log(`listening on port ${PORT}`);
+  });
 }
 
+init();
 
 const PORT = 3000;
 
