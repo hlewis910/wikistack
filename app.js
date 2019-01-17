@@ -1,6 +1,6 @@
 const morgan = require('morgan');
 const express = require('express');
-const { db } = require('./views/models');
+const { db } = require('./models');
 
 const app = express();
 
@@ -19,19 +19,15 @@ then(() => {
 })
 
 const init = async () => {
-  await models.user.sync()
-  await models.page.sync()
-  await models.db.sync()
-
-  expressApp.list(PORT, () => {
-    console.log(`listening on port ${PORT}`);
-  });
+  //Secind option:
+    //await models.user.sync()
+    //await models.page.sync()
+    await db.sync()
+    //await models.db.sync({force: true})
+    const PORT = 3000;
+    app.listen(PORT, () => {
+      console.log(`listening on port ${PORT}`);
+  })  
 }
 
 init();
-
-const PORT = 3000;
-
-app.listen(PORT, () => {
-  console.log(`App listening in port ${PORT}`);
-});
