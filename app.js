@@ -17,6 +17,11 @@ app.get("/", (req, res) => {
     res.send('Hello World');
 })
 
+router.get("/wiki/add",(req, res, next) => {
+  res.send("/views/addPage.js")
+})
+
+
 db.authenticate().
 then(() => {
   console.log('connected to the database');
