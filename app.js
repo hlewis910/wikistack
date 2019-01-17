@@ -1,7 +1,6 @@
 const morgan = require('morgan');
 const express = require('express');
-const { db } = require('../models');
-
+const { db } = require('./views/models');
 
 const app = express();
 
@@ -14,11 +13,17 @@ app.get("/", (req, res) => {
     res.send('Hello World');
 })
 
-
 db.authenticate().
 then(() => {
   console.log('connected to the database');
 })
+
+const init = async () => {
+  await models.user.sync()
+  await models.page.sync()
+
+  
+}
 
 
 const PORT = 3000;
